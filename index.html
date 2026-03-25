@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Meme Generator</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+}
+
+.container{
+background:#1e293b;
+padding:20px;
+border-radius:10px;
+width:400px;
+}
+
+img{
+width:100%;
+border-radius:8px;
+margin-top:15px;
+}
+
+button{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+background:#22c55e;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>😂 Random Meme Generator</h2>
+
+<div id="title"></div>
+<img id="meme" src="" alt="Meme">
+
+<button onclick="getMeme()">Get Meme</button>
+
+</div>
+
+<script>
+
+async function getMeme(){
+
+try{
+
+let response = await fetch("https://meme-api.com/gimme")
+
+let data = await response.json()
+
+document.getElementById("title").innerText = data.title
+document.getElementById("meme").src = data.url
+
+}
+catch(error){
+
+document.getElementById("title").innerText = "Failed to load meme"
+
+}
+
+}
+
+// load first meme automatically
+getMeme()
+
+</script>
+
+</body>
+</html>
